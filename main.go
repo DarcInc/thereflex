@@ -98,6 +98,14 @@ func main() {
 		LastName:  "Smith",
 	})
 
+	func() {
+		type Froopie struct {
+			Age int
+		}
+
+		dm.Register("Froopie", reflect.ValueOf(Froopie{}))
+	}()
+
 	val, found := dm.GetInstance("Person")
 	if !found {
 		fmt.Println("Did not find the person")
@@ -113,5 +121,12 @@ func main() {
 		fmt.Println("What we got back wasn't Ed")
 	} else {
 		fmt.Printf("%v\n", ed)
+	}
+
+	f, ok := dm.GetInstance("Froopie")
+	if !ok {
+		fmt.Println("No froopie")
+	} else {
+		fmt.Println("got %v\n", f)
 	}
 }
